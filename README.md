@@ -1,4 +1,8 @@
+<img align="right" src="logo.svg">
+
 # Toboggan
+
+(*Image credit: Felix Reidl*)
 
 Toboggan is a research tool for decomposing a flow on a directed acyclic graph into a minimal number of paths, a problem that commonly occurs in transcript and metagenomic assembly.
 
