@@ -1,3 +1,9 @@
+Note: this is a a copy of Toboggan that I am using to create data for
+additional flow decomposition projects. The original README is below. The
+original repository url is https://github.com/TheoryInPractice/toboggan.
+
+---------------
+
 <img align="right" src="logo.svg">
 
 # Toboggan
