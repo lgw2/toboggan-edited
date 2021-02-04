@@ -251,6 +251,16 @@ class AdjList:
         plt.show()
 
 
+    def write_graphviz(self, filename):
+        f = open(filename, "w")
+        f.write("digraph G {\n")
+        f.write("rankdir=LR;\n")
+        for u, v, w in self.edges():
+            f.write("{} -> {} [ label = {} ];\n".format(u, v, w))
+        f.write("}")
+        f.close()
+
+
     def print_out(self):
         """Print the graph to screen."""
         for node in self.vertices:
