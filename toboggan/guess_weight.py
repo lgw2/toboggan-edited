@@ -10,6 +10,7 @@ import sys
 import itertools
 # local imports
 from toboggan.dp import solve as solve_dp
+from toboggan.flow import SolvedConstr
 
 
 # Print iterations progress
@@ -72,11 +73,18 @@ def solve(instance, silent=True, max_weight_lower=1,
     # if k equals the size of the largest edge cut, the weights are
     # predetermined
     if instance.k == max(len(C) for C in instance.edge_cuts):
+        if not silent:
+            print("\tk=size of largest edge cut, so weights are predetermined")
         largest_cut = max(instance.edge_cuts, key=len)
         # Important: path weights must be sorted, otherwise our
         # subsequent optimizations will remove this constraint.
         weights = list(sorted(w for _, w in largest_cut))
-        return solve_dp(instance, silent=True, guessed_weights=weights)
+        # lucy comment: there is no reason to actually solve the dp if the
+        # weights are guessed. The only thing we use the dp for at this point
+        # is to find the weights.
+        # but we need to return a SolvedConstr
+        # return solve_dp(instance, silent, guessed_weights=weights)
+        return {SolvedConstr(weights, instance)}
 
     max_weight = instance.max_weight_bounds[1]
     feasible_weights = list(filter(lambda w: w <= max_weight,
