@@ -92,7 +92,7 @@ def find_opt_size(instance, maxtime):
         with timeout(seconds=maxtime):
             while True:
                 print("# \tCall guess_weight with k = {}".format(instance.k))
-                solutions = solve(instance, silent=True)
+                solutions = solve(instance, silent=False)
                 if bool(solutions):
                     break
                 instance.try_larger_k()
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     """
         Main script
     """
-    with open('readme_short.txt', 'r') as desc:
+    with open('/home/lucy/toboggan/readme_short.txt', 'r') as desc:
         description = desc.read()
     parser = DefaultHelpParser(description=description)
     parser.add_argument('file', help='A .graph file containing the input graph(s).')
@@ -198,8 +198,10 @@ if __name__ == "__main__":
                            m_input, k if k else "?"), flush=True)
 
         start = time.time()
+        graph.write_graphviz("graph.dot")
         # contract in-/out-degree 1 vertices
         reduced, mapping = graph.contracted()
+        reduced.write_graphviz("reduced_graph.dot")
         # reduced is the graph after contractions;
         # mapping enables mapping paths on reduced back to paths in graph
         if args.print_contracted:
@@ -207,6 +209,7 @@ if __name__ == "__main__":
 
         n = len(reduced)
         m = len(list(reduced.edges()))
+        print("in reduced, {} nodes and {} edges".format(n, m))
 
         if len(reduced) <= 1:
             print("Trivial.")
