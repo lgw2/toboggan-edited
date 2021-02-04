@@ -598,6 +598,8 @@ def distribute(paths, edges):
     k = len(edges)
     paths = list(paths)
     for partition in algorithm_u(paths, k):
-        # Generate non-empty partitions with k blocks
+        # lucy comment: this is where we take all permutations of the k
+        # subsets. order doesn't matter for algorithm_u.
+        # if n == k, we shouldn't do this...
         for perm in itertools.permutations(partition):  # Permute to distribute
             yield list(zip(edges, perm))
