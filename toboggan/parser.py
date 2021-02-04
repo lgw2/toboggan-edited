@@ -58,6 +58,7 @@ def enumerate_graphs(graph_file):
 
             u = int(list[0])
             v = int(list[1])
+            # lucy comment: this is where we make the flow an integer
             flow = int(float(list[2]))
 
             graph.add_edge(u, v, flow)
