@@ -41,6 +41,9 @@ def solve(instance, silent=True, guessed_weights=None):
     allpaths = frozenset(range(k))
     # All k paths `end' at source
     old_table[PathConf(graph.source(), allpaths)] = set([globalconstr])
+    if not silent:
+        print("After processing edge into s, table is:")
+        print(old_table)
 
     # run dynamic progamming
     for v in instance.ordering[:-1]:
@@ -80,6 +83,7 @@ def solve(instance, silent=True, guessed_weights=None):
 
     if not silent:
         print("\nDone.")
+        print("Table is:")
         print(new_table)
 
     candidates = new_table[PathConf(graph.sink(), allpaths)]
