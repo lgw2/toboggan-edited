@@ -1,2 +1,8 @@
 toboggan/__pycache__
 *.sgr
+
+# put any data to be ignored in data folder
+data/
+
+# graphviz files
+*.dot
